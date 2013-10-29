@@ -1,0 +1,49 @@
+// == MIXINS
+.ellipsify () {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.transition-property (@props) {
+	    -ms-transition-property: @props;
+	-webkit-transition-property: @props;
+	   -moz-transition-property: @props;
+	        transition-property: @props;
+}
+
+.transition-duration (@length) {
+	    -ms-transition-duration: @length;
+	-webkit-transition-duration: @length;
+	   -moz-transition-duration: @length;
+	        transition-duration: @length;
+}
+.transition-timing-function (@func) {
+	    -ms-transition-timing-function: @func;
+	-webkit-transition-timing-function: @func;
+	   -moz-transition-timing-function: @func;
+	        transition-timing-function: @func;
+}
+.transform (@props) {
+	-webkit-transform: @props;
+	   -moz-transform: @props;
+	    -ms-transform: @props;
+	     -o-transform: @props;
+	        transform: @props;
+}
+.transform-origin (@props) {
+	-webkit-transform-origin: @props;
+	   -moz-transform-origin: @props;
+	    -ms-transform-origin: @props;
+	     -o-transform-origin: @props;
+	        transform-origin: @props;
+}
+.border-radius (@radii) {
+	-webkit-border-radius: @radii;
+	   -moz-border-radius: @radii;
+	    -ms-border-radius: @radii;
+	     -o-border-radius: @radii;
+	        border-radius: @radii;
+}
+
+ 

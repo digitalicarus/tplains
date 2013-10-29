@@ -1,0 +1,231 @@
+@import "vendor/normalize";
+//@import "vendor/jquery.mCustomScrollbar";
+@import "vendor/prism";
+@import "vars";
+@import "mixins";
+
+html, body {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	-webkit-font-smoothing: none;
+}
+*, *:before, *:after {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Tahoma", Geneva, Verdana;
+}
+main, footer {
+	font-family: Arial;
+}
+
+img {
+	vertical-align: middle;
+}
+
+notes {
+	display: none;
+}
+.clearfix {
+	clear: both;
+	font-size: 0;
+}
+
+*[data-framesrc] {
+	cursor: pointer;
+}
+
+.win95Button() {
+	height:1.5em;
+	width: 1.5em;
+
+	font-weight: 700;
+
+	border-color: white #bbb #bbb white;
+	.border-radius(0);
+	border-width: 2px;
+
+	background-color: #ddd;
+	background-size: .9em;
+	background-repeat: no-repeat;
+	background-position: center center; 
+
+	outline: none;
+}
+
+.container {
+	z-index: 20;
+	border: 2px outset #ccc;
+	background: #ccc;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	bottom: auto;
+
+	.transition-property(~'bottom, width, height');
+	.transition-duration(~'200ms');
+
+	&.minimized {
+		width: 20em;
+		height: 2.4em;
+	}
+}
+
+header  {
+	background: #170c8c; /* Old browsers */
+	background: -moz-linear-gradient(left,  #170c8c 0%, #0047b0 50%, #0388d4 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#170c8c), color-stop(50%,#0047b0), color-stop(100%,#0388d4)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #170c8c 0%,#0047b0 50%,#0388d4 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #170c8c 0%,#0047b0 50%,#0388d4 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #170c8c 0%,#0047b0 50%,#0388d4 100%); /* IE10+ */
+	background: linear-gradient(to right,  #170c8c 0%,#0047b0 50%,#0388d4 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#170c8c', endColorstr='#0388d4',GradientType=1 ); /* IE6-9 */
+
+	color: white;
+	margin: 1px;
+	border: 1px solid #ddd;
+   
+	h1, fieldset {
+		display: inline-block;
+		height:1.8em;
+		line-height: 1.3em;
+		margin:0;
+		padding: .3em 0;
+	}
+
+	h1 {
+		font-size: 1em;
+		float: left;
+		width: 60%;
+		padding-left: 1.5em;
+		margin-left: .3em;
+		font-weight: 100;
+		background-size: 1.4em;
+		background-position: center left;
+		.ellipsify();
+	}
+
+	fieldset {
+		float: right;
+		width: 6em;
+		text-align: right;
+		border: none;
+		padding: 2px;
+
+		button {
+			display:inline-block;
+			font-size: 1em;
+			margin: 1px;
+			padding: 0;
+			float: right;
+
+			.win95Button();
+		}
+	}  
+}
+
+main {
+	font-size: 1em;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin: 3px;
+	padding: 0 0 5% 0;
+	//padding: 0;
+	border-color: #666 #eee #eee #999;
+	border-width: 2px 1px 1px 2px;
+	border-style: solid;
+
+	.slideContainer {
+		.transform-origin(~'50% 0%');
+		padding-bottom: 25px;
+	}
+
+	section {
+		font-family: arial;
+		background: white;
+		//width: 80%;
+		//min-height: 90%;
+		width: 640px;
+		height: 480px;
+		//margin: 0px auto 20px auto;
+		margin: 50px auto;
+		border: 1px solid black;
+		box-shadow: 10px 10px 0 black;
+		padding: 1em;
+		overflow: hidden;
+		.transform-origin(~'50% 50%');
+
+		&:nth-child(1) {
+			margin: 25px auto 50px auto;
+		}
+
+		blockquote {
+			font-size: .80em;
+			font-family: Verdana;
+
+			color: #666;
+
+			q {
+				color: #000;
+				display: block;
+				margin: 0 0 8px 0;
+			}
+		}
+
+		position: relative;
+
+		h1, h2, h3 {
+			font-size: 2em;
+			font-family: "Tinos", "EB Garamond", serif;
+			font-weight: 200;
+			margin: 0;
+		}
+
+		&>h2 {
+			font-family: sans-serif;
+			color: #666;
+			position: absolute;
+			bottom: 0.5em;
+			right: 1em;
+			font-size: 1.2em;
+		}
+
+
+		h1 {
+			font-size: 3em;
+			text-align: center;
+		}
+
+		p, p * {
+			font-size: 1.5em;
+		}
+
+	}
+}
+
+footer {
+	padding: 0 3px;
+	height: 3em;
+	line-height: 2em; 		 
+
+	section {
+		font-size: 0.9em;
+		border: 2px solid #ddd;
+		display: inline-block;
+		height: 1.8em;
+		line-height: 1.8em;
+		text-align: center;
+		width: 33%;
+	}
+}
+
+
+iframe.game {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
