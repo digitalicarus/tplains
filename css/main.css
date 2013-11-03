@@ -791,6 +791,9 @@ header fieldset button {
   background-position: center center;
   outline: none;
 }
+pre {
+  font-size: 10px;
+}
 main {
   font-size: 1em;
   overflow-y: auto;
