@@ -35,7 +35,7 @@ define([
 
 		$sections.each(function (i, v) {
 			currPos = parseInt($(v).position().top, 10);
-			if (Math.abs(currPos) <= 250) {
+			if (Math.abs(currPos) <= 180) {
 				Shared.setSlide(i+1);
 				return false; // reportedly breaks out of each
 			}
@@ -62,8 +62,6 @@ define([
 			Shared.lockOn();
 		}
 	});
-
-
 
 	Shared.applyFrameTriggers();
 

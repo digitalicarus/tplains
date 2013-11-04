@@ -88,14 +88,18 @@ define([
 		}
 
 		var $slide = $($sections[ret.slide-1]);
-
+		window.location.hash = ret.slide;
 
 		//console.log('ret.slide: ' + ret.slide);
 		if (navigate) {
 			//console.log('navigate to: ' + $main.scrollTop() + $slide.offset().top + parseInt($slide.css('margin-top'), 10));
 			$main.animate({
 				'scrollTop':  $main.scrollTop() + $slide.offset().top - parseInt($slide.css('margin-top'), 10) * 1.5
-			}, 160);
+			}, 160, function () {
+				$('.slideIndicator').html("Slide " + ret.slide + " of " + $sections.length);
+			});
+		} else {
+			$('.slideIndicator').html("Slide " + ret.slide + " of " + $sections.length);
 		}
 	};
 
@@ -118,10 +122,6 @@ define([
 	ret.goBottom = function () {
 		ret.setSlide($sections.length, true);
 	};
-
-	$main.on('scroll', function () {
-		$('.slideIndicator').html("Slide " + ret.slide + " of " + $sections.length);
-	});
 
 	window.loadFrameSrc = ret.loadFrameSrc;
 
