@@ -6,6 +6,7 @@ require.config({
 		backbone:       'vendor/backbone-min',
 		underscore:     'vendor/underscore-min',
 		prism:          'vendor/prism',
+		clippy:         'vendor/clippy.min',
 		jquery:         'vendor/jquery-2.0.3.min',
 		matchmedia:     'vendor/matchMedia',
 		fastclick:      'vendor/fastclick',
@@ -53,6 +54,10 @@ require.config({
 			deps: ['jquery']
 		},
 		hammerjq: {
+			deps: ['jquery']
+		},
+		clippy: {
+			exports: 'clippy',
 			deps: ['jquery']
 		},
 		scrollto: {

@@ -14,6 +14,11 @@ define([
 
 
 	$(window).on('resize', Shared.resize);
+	$(window).on('deviceorientation', function (e) {
+		setTimeout(function () {
+			Shared.resize();
+		}, 300);
+	});
 
 	$('button.bg-minimize').on('click', Shared.minimize);
 	$('button.bg-maximize').on('click', Shared.maximize);

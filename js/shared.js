@@ -2,8 +2,9 @@
 //TODO: write dot template plugin
 define([
 	'dot',
-	'jquery'
-], function (dot, $) {
+	'jquery',
+	'clippy'
+], function (dot, $, clippy) {
 	"use strict";
 
 	var ret = {}
@@ -14,10 +15,13 @@ define([
 	,   $contentContainer = $('main').find('.container')
 	,   $sections = $('.slideContainer section')
 	,   $gameframe = $('iframe.game')
+	,   agent = null
 	;
 
 	ret.dot = dot;
+	ret.clippy = clippy;
 	ret.slide = 1;
+	ret.lastSlide = 0;
 
 	ret.swapVis  = function ($replaceWhat, $replaceWith) {
 		$($replaceWhat).hide();
@@ -29,8 +33,12 @@ define([
 		,   headerHeight = parseInt($header.height(), 10)
 		,   footerHeight = parseInt($footer.height(), 10)
 		,   mainHeight = priHeight - headerHeight - footerHeight
-		,   sectionMargin = parseInt($('main section').css('margin-bottom'), 10)
-		,   sectionScale = mainHeight / (parseInt($('main section').outerHeight(), 10) + sectionMargin)
+		,   mainWidth = parseInt($main.width(), 10)
+		,   sectionMargin = parseInt($('.slideContainer > section').css('margin-bottom'), 10)
+		,   sectionMarginLeft = parseInt($('.slideContainer > section').css('margin-left'), 10)
+		,   sectionScale = (mainHeight < mainWidth) ?
+				mainHeight / (parseInt($('.slideContainer > section').outerHeight(), 10) + sectionMargin) :
+				mainWidth / (parseInt($('.slideContainer > section').outerWidth(), 10) + sectionMarginLeft*2)
 		;
 
 		console.log(sectionScale);
@@ -90,6 +98,7 @@ define([
 		var $slide = $($sections[ret.slide-1]);
 		window.location.hash = ret.slide;
 
+
 		//console.log('ret.slide: ' + ret.slide);
 		if (navigate) {
 			//console.log('navigate to: ' + $main.scrollTop() + $slide.offset().top + parseInt($slide.css('margin-top'), 10));
@@ -97,6 +106,10 @@ define([
 				'scrollTop':  $main.scrollTop() + $slide.offset().top - parseInt($slide.css('margin-top'), 10) * 1.5
 			}, 160, function () {
 				$('.slideIndicator').html("Slide " + ret.slide + " of " + $sections.length);
+				if (ret.slide !== ret.lastSlide) {
+					ret.goClippy();
+					ret.lastSlide = ret.slide;
+				}
 			});
 		} else {
 			$('.slideIndicator').html("Slide " + ret.slide + " of " + $sections.length);
@@ -123,6 +136,31 @@ define([
 		ret.setSlide($sections.length, true);
 	};
 
+	ret.goClippy = function () {
+		var text = $($sections[ret.slide-1]).find('notes').text();
+		console.log(text);
+
+		if (!agent) {
+			return;
+		}
+		else {
+			agent.stopCurrent();
+			if (text && !text.match(/^\s*$/)) {
+				agent.speak(text);
+			} else {
+				agent.animate();
+			}
+		}
+	};
+
+	clippy.load('Clippy', function (clipmeister) {
+		agent = clipmeister;
+		agent.show();
+		setTimeout(function () {
+			$('.clippy, .clippy-balloon').appendTo('main');
+			ret.resize();
+		}, 300);
+	});
 	window.loadFrameSrc = ret.loadFrameSrc;
 
 	return ret;
