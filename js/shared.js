@@ -12,10 +12,12 @@ define([
 	,   $footer = $('footer')
 	,   $primaryContainer = $('.container.primary')
 	,   $contentContainer = $('main').find('.container')
+	,   $sections = $('.slideContainer section')
 	,   $gameframe = $('iframe.game')
 	;
 
 	ret.dot = dot;
+	ret.slide = 1;
 
 	ret.swapVis  = function ($replaceWhat, $replaceWith) {
 		$($replaceWhat).hide();
@@ -36,6 +38,7 @@ define([
 		$main.outerHeight(priHeight - headerHeight - footerHeight);
 
 		$('.slideContainer').css({
+			'transform': 'scale(' + sectionScale + ')',
 			'-webkit-transform': 'scale(' + sectionScale + ')',
 			'-ms-transform': 'scale(' + sectionScale + ')',
 			'-moz-transform': 'scale(' + sectionScale + ')'
@@ -70,6 +73,55 @@ define([
 		});
 	};
 
+	ret.setSlide = function (slide, navigate) {
+		if (!parseInt(slide, 10)) {
+			console.log(slide + " is not a valid slide number");
+			ret.slide = 1;
+		} else {
+			ret.slide = slide;
+			if (ret.slide < 0) {
+				ret.slide = 1;
+			}
+			if (ret.slide > $sections.length) {
+				ret.slide = $sections.length;
+			}
+		}
+
+		var $slide = $($sections[ret.slide-1]);
+
+
+		//console.log('ret.slide: ' + ret.slide);
+		if (navigate) {
+			//console.log('navigate to: ' + $main.scrollTop() + $slide.offset().top + parseInt($slide.css('margin-top'), 10));
+			$main.animate({
+				'scrollTop':  $main.scrollTop() + $slide.offset().top - parseInt($slide.css('margin-top'), 10) * 1.5
+			}, 160);
+		}
+	};
+
+	ret.slideUp = function () {
+		ret.setSlide(ret.slide-1, true);
+	};
+
+	ret.slideDown = function () {
+		ret.setSlide(ret.slide+1, true);
+	};
+
+	ret.lockOn = function () {
+		ret.setSlide(ret.slide, true);
+	};
+
+	ret.goTop = function () {
+		ret.setSlide(1, true);
+	};
+
+	ret.goBottom = function () {
+		ret.setSlide($sections.length, true);
+	};
+
+	$main.on('scroll', function () {
+		$('.slideIndicator').html("Slide " + ret.slide + " of " + $sections.length);
+	});
 
 	window.loadFrameSrc = ret.loadFrameSrc;
 
