@@ -183,19 +183,7 @@
 
 					<h2>Magick, lore, wisdom</h2>
 				</section>
-				<section>
-					<h1>Midpoint Displacement</h1>
-					<img src="asset/scorch_title_1.png" height="200"/>
-					<img style="position:absolute; bottom:20px; right:20px;" src="asset/fractalterrain.gif" height="200"/>
-					<h2>Magick, lore, wisdom</h2>
-				</section>
-				<section>
-					<h1>Raycasting</h1>
-					<img src="asset/ba3draycast.png" height="200"/>
-					<img style="position:absolute; top:78px; right:10px" src="asset/permadicastimg.gif" height="300"/>
-					<img style="position:absolute; bottom:20px; left: 20px;" src="asset/permadidistortion.gif" height="150"/>
-					<h2>Magick, lore, wisdom</h2>
-				</section>
+				<!--
 				<section>
 					<h1>Dost thou even code, brother?</h1>
 					<br/>
@@ -204,6 +192,13 @@
 					</center>
 
 					<h2>Casting some spells</h2>
+				</section>
+				-->
+				<section>
+					<h1>Midpoint Displacement</h1>
+					<img src="asset/scorch_title_1.png" height="200"/>
+					<img style="position:absolute; bottom:20px; right:20px;" src="asset/fractalterrain.gif" height="200"/>
+					<h2>Magick, lore, wisdom</h2>
 				</section>
 				<section>
 					<h3>Midpoint Displacement</h3>
@@ -229,13 +224,19 @@
 					<h2>Casting some spells</h2>
 				</section>
 				<section>
+					<h1>Raycasting</h1>
+					<img src="asset/ba3draycast.png" height="200"/>
+					<img style="position:absolute; top:78px; right:10px" src="asset/permadicastimg.gif" height="300"/>
+					<img style="position:absolute; bottom:20px; left: 20px;" src="asset/permadidistortion.gif" height="150"/>
+					<h2>Magick, lore, wisdom</h2>
+				</section>
+				<section>
 					<h3>Raycasting - casting a ray (Permadi)</h3>
 					<ol>
-						<li>find first horizontal grid intersection</li>
-						<li>find first vertical grid intersection</li>
-						<li>figure out if going left||right and up||down (down is +!)</li>
-						<li>check first horiz grid for hit, keep incrementing Y until hit or out of bounds</li>
-						<li>check first vert grid for hit, keep incrementing X until hit or out of bounds</li>
+						<li>find first horizontal grid intersection by solving the triangle</li>
+						<li>figure out if going up||down (down is +!)</li>
+						<li>check first horiz grid for hit, keep incrementing until hit or out of bounds</li>
+						<li>repeat above for vertical intersections, but sideways :)</li>
 						<li>horizHitDist &lt; vertHitDist?</li>
 						<li>mark hit tile and texture offset</li>
 					</ol>
@@ -313,7 +314,7 @@ Capitalize:          str.charAt(0).toUpperCase() + str.slice(1)
 						<li>Apple Floppy Copy</li>
 						<li>Evercookie</li>
 						<li>Pointer arithmetic for mathematics - Abrash</li>
-						<li>clippy.js "We build clippy.js over the weekend to remind people to try risky and silly things"</li>
+						<li>clippy.js "We built clippy.js over the weekend to remind people to try risky and silly things"</li>
 					</ul>
 					<center>
 						<b>Try weird stuff!</b>
